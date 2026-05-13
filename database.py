@@ -39,16 +39,16 @@ def add_user(fullname, username, user_id):
         return ValueError(f"Integer xatoligi: {e}")
 
 
-def get_users():
-    with get_connection() as conn:
-        cursor = conn.execute('''SELECT * FROM users;''').fetchall()
-        return cursor
-
-
 def delete_user(telegram_id):
     with get_connection() as conn:
         cursor = conn.execute('''DELETE FROM users where user_id = (?)''', (telegram_id,))
         return cursor
+
+
+def get_users():
+    with get_connection() as conn:
+        cursor = conn.execute('''SELECT * FROM users;''').fetchall()
+    return cursor
 
 
 def get_id():
@@ -56,3 +56,5 @@ def get_id():
         return conn.execute(
             "SELECT user_id FROM users"
         ).fetchall()
+
+

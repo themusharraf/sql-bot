@@ -1,7 +1,7 @@
 import os
 import logging
 import asyncio
-from routers import start,admin
+from routers import start,admin,ads
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher
 from database import create_table_users
@@ -14,7 +14,7 @@ async def main():
     bot = Bot(token=os.getenv("BOT_API_TOKEN"))
     dp = Dispatcher()
 
-    dp.include_routers(start.router,admin.router)
+    dp.include_routers(start.router,admin.router,ads.router)
 
     await dp.start_polling(bot)
 

@@ -41,6 +41,18 @@ def add_user(fullname, username, user_id):
 
 def get_users():
     with get_connection() as conn:
-        cursor = conn.execute('''SELECT * FROM users;''')
-        return cursor.fetchall()
+        cursor = conn.execute('''SELECT * FROM users;''').fetchall()
+        return cursor
 
+
+def delete_user(telegram_id):
+    with get_connection() as conn:
+        cursor = conn.execute('''DELETE FROM users where user_id = (?)''', (telegram_id,))
+        return cursor
+
+
+def get_id():
+    with get_connection() as conn:
+        return conn.execute(
+            "SELECT user_id FROM users"
+        ).fetchall()
